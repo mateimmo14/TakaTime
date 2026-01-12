@@ -1,5 +1,7 @@
 const vscode = require("vscode");
-const env = require("./Plugin/StatusBarUpdate");
+const statusHelper = require("./Plugin/StatusBarUpdate");
+const env = require("./Plugin/Config");
+const downloader = require("./Plugin/BinaryDownload"); // Import the new file
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
@@ -10,69 +12,76 @@ const os = require("os");
 async function activate(context) {
   console.log("TakaTime: Initializing...");
 
-  // 1. Create Status Bar
   const statusBar = vscode.window.createStatusBarItem(
     vscode.StatusBarAlignment.Left,
     100
   );
   statusBar.text = "$(sync~spin) TakaTime: Checking...";
-  statusBar.command = "takatime.setup"; // 👈 Clicking this runs the setup command
+  statusBar.command = "takatime.setup";
   statusBar.show();
   context.subscriptions.push(statusBar);
 
-  // 2. Register the Setup Command
+  // --- SMART SETUP COMMAND ---
   const setupCommand = vscode.commands.registerCommand(
     "takatime.setup",
     async () => {
-      // Ask user for URI
-      const uri = await vscode.window.showInputBox({
-        placeHolder: "mongodb+srv://admin:password@...",
-        prompt: "Enter your MongoDB Connection String to start tracking",
-        ignoreFocusOut: true,
-        password: true, // Hides the text for privacy
-      });
+      const config = env.getConfig();
 
-      if (!uri) return; // User cancelled
+      // CASE 1: Config/URI is missing -> Ask for it
+      if (!config || !config.MONGO_URI) {
+        const uri = await vscode.window.showInputBox({
+          placeHolder: "mongodb+srv://admin:password@...",
+          prompt: "Enter your MongoDB Connection String",
+          ignoreFocusOut: true,
+          password: true,
+        });
 
-      // Read existing config to preserve VERSION
-      const homeDir = os.homedir();
-      const configPath = path.join(homeDir, ".takatime.json");
-      let currentConfig = {};
+        if (!uri) return;
 
-      try {
-        if (fs.existsSync(configPath)) {
-          currentConfig = JSON.parse(fs.readFileSync(configPath, "utf8"));
+        // Save Config Logic (Same as before)
+        const homeDir = os.homedir();
+        const configPath = path.join(homeDir, ".takatime.json");
+        let newConfig = config || { VERSION: env.CURRENT_VERSION };
+        newConfig.MONGO_URI = uri;
+        if (!newConfig.VERSION) newConfig.VERSION = env.CURRENT_VERSION;
+
+        try {
+          fs.writeFileSync(configPath, JSON.stringify(newConfig, null, 4));
+          vscode.window.showInformationMessage("Configuration Saved!");
+          // Check status again (will likely prompt for download next click)
+          statusHelper.checkStatus(statusBar);
+        } catch (e) {
+          vscode.window.showErrorMessage("Failed to save config");
         }
-      } catch (e) {
-        /* ignore */
+        return;
       }
 
-      // Update URI
-      currentConfig.MONGO_URI = uri;
-      if (!currentConfig.VERSION) currentConfig.VERSION = "v1.0.0"; // Ensure version exists
-
-      // Save back to file
-      try {
-        fs.writeFileSync(configPath, JSON.stringify(currentConfig, null, 4));
-        vscode.window.showInformationMessage("TakaTime: Configuration Saved! ");
-
-        // 🔄 RE-RUN CHECKS immediately
-        env.checkStatus(statusBar);
-      } catch (err) {
-        vscode.window.showErrorMessage(`Failed to save config: ${err.message}`);
+      // CASE 2: Binary is Missing -> Download it
+      const isBinaryReady = env.checkBinary(env.CURRENT_VERSION);
+      if (!isBinaryReady) {
+        try {
+          const success = await downloader.downloadBinary(env.CURRENT_VERSION);
+          if (success) {
+            vscode.window.showInformationMessage(
+              `TakaTime ${env.CURRENT_VERSION} installed successfully! `
+            );
+            statusHelper.checkStatus(statusBar); // Should turn Green now
+          }
+        } catch (err) {
+          vscode.window.showErrorMessage(`Download Failed: ${err.message}`);
+        }
+        return;
       }
+
+      // CASE 3: Everything is good
+      vscode.window.showInformationMessage("TakaTime is active and running! ");
     }
   );
 
   context.subscriptions.push(setupCommand);
-
-  // 3. Initial Check on Startup
-  env.checkStatus(statusBar);
+  statusHelper.checkStatus(statusBar);
 }
 
 function deactivate() {}
 
-module.exports = {
-  activate,
-  deactivate,
-};
+module.exports = { activate, deactivate };

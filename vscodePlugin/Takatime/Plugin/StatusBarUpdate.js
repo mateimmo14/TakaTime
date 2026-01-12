@@ -16,7 +16,7 @@ function checkStatus(statusBar) {
       return;
     }
 
-    const isBinaryReady = env.checkBinary(config.VERSION);
+    const isBinaryReady = env.checkBinary(env.CURRENT_VERSION);
     if (!isBinaryReady) {
       statusBar.text = "$(cloud-download) TakaTime: Binary Missing";
       statusBar.tooltip = "Binary missing. Auto-download coming soon.";
@@ -25,7 +25,7 @@ function checkStatus(statusBar) {
     }
 
     // Success State
-    statusBar.text = "$(check) TakaTime: Active";
+    statusBar.text = `$(check) TakaTime: Active (${env.CURRENT_VERSION})`;
     statusBar.tooltip = `Tracking to: ${config.MONGO_URI.substring(0, 15)}...`;
     statusBar.backgroundColor = undefined;
   } catch (err) {

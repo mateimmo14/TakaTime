@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 
+const CURRENT_VERSION = "v2.0.3";
+
 function getConfig() {
   const homeDir = os.homedir();
   const configPath = path.join(homeDir, ".takatime.json");
@@ -11,7 +13,7 @@ function getConfig() {
   if (!fs.existsSync(configPath)) {
     const defaultConfig = {
       MONGO_URI: "",
-      VERSION: "v2.0.4", // Default version to match your GitHub Release
+      VERSION: CURRENT_VERSION, // Default version to match your GitHub Release
     };
 
     try {
@@ -77,6 +79,14 @@ function checkBinary(version) {
     );
     return false;
   }
+
+  // 👇 WE ADD VERSION TO THE LOCAL FILENAME HERE
+  if (process.platform === "win32") {
+    binName = `taka-uploader-${version}.exe`;
+  } else {
+    binName = `taka-uploader-${version}`;
+  }
+
   const binaryPath = path.join(homeDir, ".takatime", "bin", binName);
 
   if (!fs.existsSync(binaryPath)) {
@@ -93,4 +103,5 @@ function checkBinary(version) {
 module.exports = {
   getConfig,
   checkBinary,
+  CURRENT_VERSION,
 };
