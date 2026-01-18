@@ -133,27 +133,31 @@ TakaTime comes with a report generator that works with GitHub Actions to update 
 
 > [!NOTE]
 > **TakaTime Dashboard**
-> _Jan 10_ to _Jan 17_
+> _Jan 11_ to _Jan 18_
 
 > [!TIP]
-> **Total Coding Time (7d):** 0h 4m
+> **Total Coding Time (7d):** 0h 18m
 
 #### 📈 Trends
 | Period        | Duration    | Period       | Duration    |
 | :---          | :---        | :---         | :---        |
-| Yesterday     | **4m**      | Last 7 Days  | **4m**      |
-| Last 30 Days  | **4h 22m**  | All Time     | **4h 22m**  |
+| Yesterday     | **18m**     | Last 7 Days  | **18m**     |
+| Last 30 Days  | **4h 36m**  | All Time     | **4h 36m**  |
 
 #### 💻 Languages
 | Language | Time | Percentage |
 | :--- | :--- | :--- |
-| **ignore** | 2m | 🟦🟦🟦🟦🟦⬜⬜⬜⬜⬜ 50.0% |
-| **javascript** | 2m | 🟦🟦🟦🟦🟦⬜⬜⬜⬜⬜ 50.0% |
+| **json** | 6m | 🟦🟦🟦⬜⬜⬜⬜⬜⬜⬜ 33.3% |
+| **go** | 4m | 🟦🟦⬜⬜⬜⬜⬜⬜⬜⬜ 22.2% |
+| **markdown** | 4m | 🟦🟦⬜⬜⬜⬜⬜⬜⬜⬜ 22.2% |
+| **javascript** | 2m | 🟦⬜⬜⬜⬜⬜⬜⬜⬜⬜ 11.1% |
+| **Other** | 2m | 🟦⬜⬜⬜⬜⬜⬜⬜⬜⬜ 11.1% |
 
 #### 🔥 Projects
 | Project | Time | Percentage |
 | :--- | :--- | :--- |
-| **Takatime** | 4m | 🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 100.0% |
+| **Takatime** | 14m | 🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜ 77.8% |
+| **testTakaTime** | 4m | 🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜ 22.2% |
 
 
 <!--takatime-end-->
@@ -244,27 +248,31 @@ MIT License. See `LICENSE` for details.
 
 > [!NOTE]
 > **TakaTime Dashboard**
-> _Jan 10_ to _Jan 17_
+> _Jan 11_ to _Jan 18_
 
 > [!TIP]
-> **Total Coding Time (7d):** 0h 4m
+> **Total Coding Time (7d):** 0h 18m
 
 #### 📈 Trends
 | Period        | Duration    | Period       | Duration    |
 | :---          | :---        | :---         | :---        |
-| Yesterday     | **4m**      | Last 7 Days  | **4m**      |
-| Last 30 Days  | **4h 22m**  | All Time     | **4h 22m**  |
+| Yesterday     | **18m**     | Last 7 Days  | **18m**     |
+| Last 30 Days  | **4h 36m**  | All Time     | **4h 36m**  |
 
 #### 💻 Languages
 | Language | Time | Percentage |
 | :--- | :--- | :--- |
-| **ignore** | 2m | 🟦🟦🟦🟦🟦⬜⬜⬜⬜⬜ 50.0% |
-| **javascript** | 2m | 🟦🟦🟦🟦🟦⬜⬜⬜⬜⬜ 50.0% |
+| **json** | 6m | 🟦🟦🟦⬜⬜⬜⬜⬜⬜⬜ 33.3% |
+| **go** | 4m | 🟦🟦⬜⬜⬜⬜⬜⬜⬜⬜ 22.2% |
+| **markdown** | 4m | 🟦🟦⬜⬜⬜⬜⬜⬜⬜⬜ 22.2% |
+| **javascript** | 2m | 🟦⬜⬜⬜⬜⬜⬜⬜⬜⬜ 11.1% |
+| **Other** | 2m | 🟦⬜⬜⬜⬜⬜⬜⬜⬜⬜ 11.1% |
 
 #### 🔥 Projects
 | Project | Time | Percentage |
 | :--- | :--- | :--- |
-| **Takatime** | 4m | 🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 100.0% |
+| **Takatime** | 14m | 🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜ 77.8% |
+| **testTakaTime** | 4m | 🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜ 22.2% |
 
 
 <!--takatime-end-->
