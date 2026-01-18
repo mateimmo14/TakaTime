@@ -57,6 +57,12 @@ https://github.com/user-attachments/assets/a3c492d8-898c-497a-bc0c-c2f8ebc5d03b
 
 ### Using [lazy.nvim](https://github.com/folke/lazy.nvim)
 
+
+
+https://github.com/user-attachments/assets/edf09531-ed66-4709-9b78-5edc90843510
+
+
+
 Add this to your plugin configuration:
 
 ```lua
@@ -79,7 +85,7 @@ return {
 Step 1: Get a Database
 
 You need a MongoDB connection string. You have two free options:
-- add all ip access
+- add all ip access `(only if you keeping changing wifi)`
 - <img width="986" height="752" alt="image" src="https://github.com/user-attachments/assets/d9433977-e841-4e0d-a1d2-9847901501d6" />
 - Cloud (Recommended): Create a free account on MongoDB Atlas. Create a free cluster and get your connection string (e.g., mongodb+srv://user:pass@cluster...).
 - Local (Docker): Run docker run -d -p 27017:27017 mongo.
