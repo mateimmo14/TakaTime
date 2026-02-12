@@ -66,9 +66,9 @@
 - [GitHub Profile Stats Setup](#how-to-add-stats-to-your-github-profile)
   - [Customization & Themes](#Customization-&-Themes)
   - [Configuration Parameters](#Configuration-Parameters)
-- [Troubleshooting](#-troubleshooting)
-- [Disclaimer & Roadmap](#-disclaimer--roadmap)
-- [License](#-license)
+- [Troubleshooting](#troubleshooting)
+- [Disclaimer & Roadmap](#disclaimer--roadmap)
+- [License](#license)
 
 ---
 
