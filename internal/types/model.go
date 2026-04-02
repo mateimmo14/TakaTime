@@ -95,6 +95,7 @@ type ThemeConfig struct {
 	Color3 string // Tertiary (Yellow/Orange)
 	Color4 string // Quaternary (Red/Purple)
 }
+
 func DefaultTheme() ThemeConfig {
 	return ThemeConfig{
 		BackgroundColor:    "#0d1117", // GitHub Dark Dimmed
@@ -106,4 +107,13 @@ func DefaultTheme() ThemeConfig {
 		Color3:             "#e3b341", // Gold
 		Color4:             "#f78166", // Red
 	}
+}
+
+// cache for dashborad
+type CacheData struct {
+	Languages []ListStats    `json:"languages"`
+	Projects  []ListStats    `json:"projects"`
+	OS        []ListStats    `json:"os"`
+	Editors   []ListStats    `json:"editors"`
+	TimeStats TimeGridStruct `json:"timeStats"`
 }

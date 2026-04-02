@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	dbqueryv2 "github.com/Rtarun3606k/TakaTime/internal/DBQueryV2"
 	"github.com/Rtarun3606k/TakaTime/internal/db"
@@ -42,8 +43,18 @@ func (m Model) GetData(URI string) (Model, *mongo.Client, error) {
 		case "editor":
 			m.editorListStats = data
 		}
+
 	}
 
+	//get time grid stats today yestarday all that
+
+	timeStats, err := dbqueryv2.GetTimeStats(Client)
+	if err != nil {
+		log.Println("could not fetch timestats ", err)
+	}
+
+	m.DataFetchedTime = time.Now().Add(-3 * time.Minute)
+	m.TimeStats = timeStats
 	// Return model
 	return m, Client, nil
 }

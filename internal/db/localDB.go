@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/Rtarun3606k/TakaTime/internal/types"
 	_ "modernc.org/sqlite"
@@ -38,7 +39,12 @@ func InitSQLite() (*sql.DB, error) {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         data TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );`
+    );
+		CREATE TABLE IF NOT EXISTS dashboard_cache (
+		id TEXT PRIMARY KEY,
+		data TEXT,
+		updated_at DATETIME
+	);`
 
 	if _, err := sqliteDB.Exec(query); err != nil {
 		return nil, err
@@ -134,4 +140,43 @@ func SyncQueue(mongoURI string, db *sql.DB) {
 			break // Queue is empty or sync failed (loop stops)
 		}
 	}
+}
+
+// SaveDashboardCache overwrites the 'main' cache row with fresh data
+func SaveDashboardCache(db *sql.DB, data types.CacheData) error {
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+
+	// INSERT OR REPLACE ensures we never have duplicate rows.
+	// It just overwrites the 'main' ID every time.
+	query := `INSERT OR REPLACE INTO dashboard_cache (id, data, updated_at) VALUES ('main', ?, ?)`
+	_, err = db.Exec(query, string(jsonData), time.Now())
+	return err
+}
+
+// GetDashboardCache checks if data exists and is less than 5 minutes old
+func GetDashboardCache(db *sql.DB) (*types.CacheData, error) {
+	var rawJSON string
+	var updatedAt time.Time
+
+	// Fetch the single 'main' row
+	err := db.QueryRow("SELECT data, updated_at FROM dashboard_cache WHERE id = 'main'").Scan(&rawJSON, &updatedAt)
+	if err != nil {
+		return nil, err // Will return error if no cache exists yet
+	}
+
+	//  THE 5-MINUTE RULE
+	if time.Since(updatedAt) > 5*time.Minute {
+		return nil, fmt.Errorf("cache expired") // Force a fresh fetch
+	}
+
+	// Unmarshal the valid cache
+	var cache types.CacheData
+	if err := json.Unmarshal([]byte(rawJSON), &cache); err != nil {
+		return nil, err
+	}
+
+	return &cache, nil
 }
