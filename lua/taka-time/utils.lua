@@ -110,7 +110,7 @@ function M.ensure_binaries()
 			arch
 		)
 
-		vim.fn.system({ "curl", "-L", "-o", dest_path, url })
+		vim.fn.system({ "curl", "-fSL", "-o", dest_path, url })
 		vim.fn.system({ "chmod", "+x", dest_path })
 	end
 
