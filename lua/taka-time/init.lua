@@ -67,7 +67,7 @@ function M.setup(opts)
 			border = "rounded",
 		})
 
-		local bin_path = utils.get_binary_path_dahboard()
+		local bin_path = utils.get_binary_path("taka-dashboard")
 
 		-- 5. Construct the command and launch the terminal!
 		-- NOTE: Make sure 'taka-dash' is either in your system PATH,

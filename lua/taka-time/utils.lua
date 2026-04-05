@@ -1,6 +1,7 @@
 local M = {}
 local config = require("taka-time.config")
-function M.get_binary(binary)
+
+function M.get_binary_path(binary)
 	local plugin_root = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h:h:h")
 	local bin_path = plugin_root .. "/" .. binary
 
@@ -64,7 +65,7 @@ end
 --------------------------------------------------------------------------------------------
 
 function M.ensure_binary(binary)
-	local bin_path = M.get_binary(binary)
+	local bin_path = M.get_binary_path(binary)
 	local target_ver = config.options.binary_version
 	local current_ver = M.get_installed_version()
 
