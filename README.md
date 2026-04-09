@@ -59,6 +59,24 @@
 <p align="center"><em>Generated automatically by <a href="https://github.com/Rtarun3606k/TakaTime">TakaTime</a></em></p>
 
 <!--takatime-end-->
+
+## Interactive Dashboard (New!)
+
+TakaTime now includes a fully interactive, terminal-based dashboard directly inside your editor. View your coding stats, language breakdowns, and project times without ever leaving your workflow or opening a browser.
+
+**How to open the dashboard:**
+- **VS Code:** Click the **Graph Icon** in the top-right corner of your editor tab, or use the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run `TakaTime: Open Dashboard`.
+- **Neovim:** Run the command `:TakaDash` to open the floating UI.
+
+<br>
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/a15288c7-95b2-49f2-8d50-200b087af36c" width="49%" alt="VS Code Dashboard" />
+  <img src="https://github.com/user-attachments/assets/5f53508c-4659-46e6-a0ab-ba5d9d537ed4" width="49%" alt="Neovim Dashboard" />
+  <p><em>TakaTime Dashboard running locally in Neovim (left) and VS Code (right)</em></p>
+</div>
+---
+
 ---
 
 ## Table of Contents
@@ -84,6 +102,21 @@
 - **Automated Dependency Management** The plugin automatically detects the host operating system (Linux/macOS) and retrieves the appropriate pre-compiled binary during the initial setup.
 - **Portfolio Visualization** Includes a dedicated CLI utility for generating high-resolution statistical charts, optimized for seamless integration into GitHub Profile READMEs.
 - **Granular Telemetry** Intelligently tracks and categorizes development activity by project, programming language, and file type without requiring manual configuration.
+
+---
+
+## Editor Compatibility & Features
+
+TakaTime is built to be cross-platform and editor-agnostic. Both plugins share the same core Go binaries, ensuring a consistent experience.
+
+| Feature | Neovim | VS Code | OS Support |
+| :--- | :--- | :--- | :--- |
+| **Background Uploader** | ✓ Supported | ✓ Supported | Windows, macOS, Linux |
+| **Interactive Dashboard** | ✓ Supported | ✓ Supported | Windows, macOS, Linux |
+| **Profile Stats Reporter** | ✓ Supported | ✓ Supported | Windows, macOS, Linux |
+| **Privacy Controls** | ✓ Supported (`.takaignore`, `.takatrack`) | ⚙ Planned (Future Release) | All OS |
+
+*(Note: Privacy controls for VS Code are currently in active development and will be rolling out soon!)*
 
 ---
 
@@ -173,6 +206,22 @@ return {
   ```
   
   If it says "TakaTime is configured and running," you are good to go!
+
+- ### Step 4: Interactive Dashboard (New!)
+
+TakaTime now includes a fully interactive, terminal-based dashboard directly inside your editor. View your coding stats, language breakdowns, and project times without ever leaving your workflow or opening a browser.
+
+How to open the dashboard:
+
+VS Code: Click the Graph Icon in the top-right corner of your editor tab, or use the Command Palette (Ctrl+Shift+P / Cmd+Shift+P) and run TakaTime: Open Dashboard.
+
+- #### Neovim: Run the command :TakaDash to open the floating UI.
+    ```nvim
+    :TakaDashboard
+    ```
+- #### VsCode :
+  <img width="1093" height="110" alt="image" src="https://github.com/user-attachments/assets/b65ebbef-993f-4368-951e-fb6c1c4bd952" />
+
   
   ---
 
@@ -255,6 +304,8 @@ jobs:
 
 - ## Customization & Themes
 
+- ### Taka Report Customization & Themes
+
     Taka-Report supports full customization through command-line flags. You can choose from pre-built themes or override specific colors to match your GitHub profile aesthetic.
     
  -  ### 1. Base Themes
@@ -310,6 +361,10 @@ jobs:
   ```bash
   ./taka-report -days=7 -bg "#0d1117" -text "#00FF00" -subtext "#008800" -bar-bg "#111111" -c1 "#00FF00" -c2 "#00DD00" -c3 "#00AA00" -c4 "#005500"
   ```
+- ### Taka-Dashboard Customization & Themes
+  Click S to select themes 
+  <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f2bd6063-d068-45b2-8066-a0eba4844d11" />
+
 
 ---
 
