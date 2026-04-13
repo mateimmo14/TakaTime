@@ -85,6 +85,7 @@ TakaTime now includes a fully interactive, terminal-based dashboard directly ins
 - [Installation](#installation)
   - [Using VS Code](#using-vs-code)
   - [Using lazy.nvim](#using-lazynvim)
+  - [Using Antigravity](#using-antigravity).
 - [Setup Guide](#setup-guide)
 - [GitHub Profile Stats Setup](#how-to-add-stats-to-your-github-profile)
   - [Customization & Themes](#Customization-&-Themes)
@@ -170,6 +171,19 @@ return {
   end,
 }
 ```
+
+---
+
+### Using Antigravity
+
+
+###  How to Install Manually (Using `.vsix`)
+1. **Download the file:** [Click here to download takatime-0.1.1.vsix](https://github.com/Rtarun3606k/TakaTime/releases/download/v2.2.2/takatime-0.1.1.vsix) directly.
+3. **Install from VSIX:** Click the **...** (three dots/gear icon) at the top right of the Extensions panel and select **"Install from VSIX..."**.
+4. **Select the file:** Locate and select the `.vsix` file you just downloaded.
+5. **Configure Database:** Once installed, run the `TakaTime: Setup` command (or click the status bar) and enter your MongoDB Connection String.
+
+
 
 ---
 
