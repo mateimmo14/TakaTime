@@ -54,9 +54,17 @@ func buildStatsList(title string, stats []types.ListStats, styles Styles.AppStyl
 	barWidth := 15
 
 	// 2. Loop through the SLICED array
+	// 2. Loop through the SLICED array
 	for _, stat := range displayStats {
-		label := styles.ListLabel.Render(utils.SafeTruncateString(stat.Label, 10))
-		value := styles.ListValue.Render(stat.Value)
+		// 1. Truncate long names, then PAD short names to exactly 12 characters (Left-Aligned)
+		safeLabel := utils.SafeTruncateString(stat.Label, 10)
+		paddedLabel := utils.SafePadText(safeLabel, 12, false)
+		label := styles.ListLabel.Render(paddedLabel)
+
+		// 2. PAD short times to exactly 8 characters (Right-Aligned so the "m" and "h" line up)
+		paddedValue := utils.SafePadText(stat.Value, 8, true)
+		value := styles.ListValue.Render(paddedValue)
+
 		percentStr := styles.ListPercent.Render(fmt.Sprintf("%8.1f%%", stat.Percent*100))
 
 		filledCount := int(stat.Percent * float64(barWidth))
@@ -69,9 +77,7 @@ func buildStatsList(title string, stats []types.ListStats, styles Styles.AppStyl
 		visualBar := filledBar + emptyBar
 
 		rowsBlock.WriteString(fmt.Sprintf("%s | %s | %s %s\n\n", label, value, visualBar, percentStr))
-	}
-
-	// 3. Add the "See More" text if we are hiding things
+	} // 3. Add the "See More" text if we are hiding things
 	if hiddenCount > 0 {
 		indicator := fmt.Sprintf("... and %d more (press 'm')", hiddenCount)
 		// Right-align or center the indicator for a clean look
@@ -95,48 +101,62 @@ func buildStatsList(title string, stats []types.ListStats, styles Styles.AppStyl
 
 // buildTimeGrid creates a row of 4 horizontal cards for your summary stats
 func buildTimeGrid(data types.TimeGridStruct, styles Styles.AppStyles, width int) string {
-	// 1. Determine Layout & Calculate Width based on Breakpoints
+	// 1. Determine Layout & Calculate Exact Math
 	var cardWidth int
 	var columns int
+	gap := 2 // 2 spaces between cards
 
 	if width >= 80 {
 		columns = 4
-		cardWidth = (width / 4) - 2 // 4 cards across
+		// Math: (Total Width - (3 gaps * 2 spaces)) / 4 cards
+		cardWidth = (width - (3 * gap)) / 4
 	} else if width >= 45 {
 		columns = 2
-		cardWidth = (width / 2) - 2 // 2 cards across
+		// Math: (Total Width - 1 gap) / 2 cards
+		cardWidth = (width - gap) / 2
 	} else {
 		columns = 1
-		cardWidth = width - 2 // 1 card across (takes full width)
+		cardWidth = width
 	}
 
-	// 2. Helper function to build a single card
+	// 2. Helper function to build a single card safely
 	buildCard := func(title, value string) string {
 		titleBlock := styles.StatCardTitle.Render(title)
 		valueBlock := styles.StatCardValue.Render(value)
 		content := lipgloss.JoinVertical(lipgloss.Center, titleBlock, valueBlock)
 
-		return styles.StatCard.Width(cardWidth).Render(content)
+		// Enforcing MaxWidth is the secret to stopping border blowouts!
+		return styles.StatCard.Copy().
+			Width(cardWidth).
+			MaxWidth(cardWidth).
+			Align(lipgloss.Center).
+			Render(content)
 	}
 
-	// 3. Build the 4 individual cards
 	yesterday := buildCard("Yesterday", data.Yestarday)
 	week := buildCard("7 Days", data.Week)
 	month := buildCard("30 Days", data.Month)
 	allTime := buildCard("All Time", data.AllTime)
 
-	// 4. Render the layout based on the calculated columns
+	// 3. Create a mathematical spacer block instead of raw string spaces
+	spacer := lipgloss.NewStyle().Width(gap).Render("")
+
+	// 4. Render the layout using the strict spacers
 	switch columns {
 	case 4:
 		// Wide screen: All in one row
-		return lipgloss.JoinHorizontal(lipgloss.Top, yesterday, "  ", week, "  ", month, "  ", allTime)
+		row := lipgloss.JoinHorizontal(lipgloss.Top, yesterday, spacer, week, spacer, month, spacer, allTime)
+
+		// Force the entire row to center inside the designated terminal width
+		return lipgloss.Place(width, lipgloss.Height(row), lipgloss.Center, lipgloss.Center, row)
 
 	case 2:
 		// Medium screen: 2x2 Grid
-		row1 := lipgloss.JoinHorizontal(lipgloss.Top, yesterday, "  ", week)
-		row2 := lipgloss.JoinHorizontal(lipgloss.Top, month, "  ", allTime)
-		// Join the two rows vertically with a blank line between them
-		return lipgloss.JoinVertical(lipgloss.Left, row1, "\n", row2)
+		row1 := lipgloss.JoinHorizontal(lipgloss.Top, yesterday, spacer, week)
+		row2 := lipgloss.JoinHorizontal(lipgloss.Top, month, spacer, allTime)
+
+		grid := lipgloss.JoinVertical(lipgloss.Left, row1, "\n", row2)
+		return lipgloss.Place(width, lipgloss.Height(grid), lipgloss.Center, lipgloss.Center, grid)
 
 	default:
 		// Small screen: Stacked vertically
