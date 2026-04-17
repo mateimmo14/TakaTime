@@ -64,13 +64,17 @@ async function activate(context) {
 
   context.subscriptions.push(saveListener);
 
-  // 3b. Notebook Save Listener (.ipynb files)
+  // 3b. Notebook Save Listener
   const notebookSaveListener = vscode.workspace.onDidSaveNotebookDocument((notebook) => {
+    // Filter out junk
+    if (notebook.uri.scheme !== "file") return;
+    if (notebook.uri.fsPath.includes(path.sep + ".git" + path.sep)) return;
+    
     // Construct a minimal document-like object so handleHeartbeat works unchanged
     const mockDocument = {
       fileName: notebook.uri.fsPath,
       uri: notebook.uri,
-      languageId: "jupyter-notebook"
+      languageId: notebook.notebookType || "unknown-notebook"
     };
     heartbeat.handleHeartbeat(mockDocument);
   });
