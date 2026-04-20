@@ -25,22 +25,47 @@ function M.get_version_file_path()
 end
 
 -- Helper: Read version from disk
-function M.get_installed_version()
+function M.get_installed_version(binary)
 	local f = io.open(M.get_version_file_path(), "r")
 	if not f then
 		return nil
 	end
-	local v = f:read("*all")
+
+	local content = f:read("*a")
 	f:close()
-	return v:gsub("%s+", "") -- trim whitespace
+
+	local ok, data = pcall(vim.json.decode, content)
+	if ok and type(data) == "table" then
+		return data[binary]
+	end
+
+	return nil
 end
 
 -- Helper: Write version to disk
-function M.write_installed_version(v)
-	local f = io.open(M.get_version_file_path(), "w")
+function M.write_installed_version(binary, version)
+	local path = M.get_version_file_path()
+	local data = {}
+
+	-- read existing
+	local f = io.open(path, "r")
 	if f then
-		f:write(v)
+		local content = f:read("*a")
 		f:close()
+		local ok, decoded = pcall(vim.json.decode, content)
+		if ok and type(decoded) == "table" then
+			data = decoded
+		end
+	end
+
+	-- update this binary only
+	data[binary] = version
+
+	-- write back
+	local wf = io.open(path, "w")
+	if wf then
+		wf:write(vim.json.encode(data))
+		wf:close()
 	end
 end
 
@@ -73,13 +98,13 @@ end
 function M.ensure_binary(binary)
 	local bin_path = M.get_binary_path(binary)
 	local target_ver = config.options.binary_version
-	local current_ver = M.get_installed_version()
-
-	-- 1. Check if we are already up to date
+local current_ver = M.get_installed_version(binary)
 	if vim.fn.filereadable(bin_path) == 1 and current_ver == target_ver then
-		return
+		local size = vim.fn.getfsize(bin_path)
+		if size > 50000 then
+			return
+		end
 	end
-
 	-- 2. Update logic
 	if current_ver and current_ver ~= target_ver then
 		print(string.format("[Taka] Updating %s %s -> %s...", binary, current_ver, target_ver))
@@ -105,7 +130,7 @@ function M.ensure_binary(binary)
 	if vim.fn.filereadable(bin_path) == 1 then
 		os.remove(bin_path)
 	end
-
+	print("taka url downloading url " .. url)
 	print("[Taka] Downloading " .. binary .. " " .. target_ver .. "...")
 	vim.fn.system({ "curl", "-L", "-o", bin_path, url })
 	if os_name ~= "windows" then
@@ -113,7 +138,7 @@ function M.ensure_binary(binary)
 	end
 
 	-- 4. Update version file
-	M.write_installed_version(target_ver)
+  M.write_installed_version(binary, target_ver)	-- 1. Check if we are already up to date
 	print("[Taka] Successfully installed " .. binary .. " " .. target_ver)
 end
 

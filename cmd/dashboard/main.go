@@ -53,11 +53,19 @@ func main() {
 
 	var mongoDBString string
 	var themeFlag string
+	var versionFlag bool
+
+	flag.BoolVar(&versionFlag, "version", false, "show version")
+
 	flag.StringVar(&mongoDBString, "MongoDBString", "", "MongoDB String for dashboard to query data")
 
 	flag.StringVar(&themeFlag, "theme", "dark", "Base theme: dark, light, dracula, nord, gruvbox, monokai, cyberpunk")
 	flag.Parse()
 
+	if versionFlag {
+		fmt.Println(types.Version)
+		return
+	}
 	//get the theme
 	theme := utils.ThemeSwitcher(themeFlag)
 

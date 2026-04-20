@@ -27,11 +27,14 @@ func main() {
 	var themeFlag string
 	var customBg, customText, customSubText, customBarBg string
 	var customC1, customC2, customC3, customC4 string
+	// add veresion flag
+	var versionFlag bool
 
 	//----------flags
 	days := flag.Int("days", 0, "Number of past days to include (0 = today)")
 	flag.StringVar(&themeFlag, "theme", "dark", "Base theme: dark, light, dracula, nord, gruvbox, monokai, cyberpunk")
-
+	//parse version flag
+	flag.BoolVar(&versionFlag, "version", false, "show version")
 	// Custom Overrides
 	flag.StringVar(&customBg, "bg", "", "Override Background Color")
 	flag.StringVar(&customText, "text", "", "Override Text Color")
@@ -46,6 +49,10 @@ func main() {
 	flag.Parse() //  Parse flags first!
 	log.Println("days as a flag is discontinued please stop adding it as a flag. remove it from your work flow file check out readme https://github.com/Rtarun3606k/Takatime for more information ", days)
 
+	if versionFlag {
+		fmt.Println(types.Version)
+		return
+	}
 	// 2. Initialize the Final 'theme' Variable
 	var theme types.ThemeConfig
 

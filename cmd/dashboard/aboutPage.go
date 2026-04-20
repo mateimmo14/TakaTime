@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/Rtarun3606k/TakaTime/internal/types"
 	"github.com/charmbracelet/lipgloss"
 )
 
@@ -34,7 +35,9 @@ func (m Model) generateAboutContent() string {
 
 	// --- SECTION 2: STATUS & MAINTENANCE ---
 	statusHeading := headingStyle.Render("Project Status")
-	statusText := subTextStyle.Render("Status: Actively Maintained\nVersion: v1.0.0")
+
+	// statusText := subTextStyle.Render("Status: Actively Maintained\nVersion: ")
+	statusText := subTextStyle.Render(fmt.Sprintf( "Status: Actively Maintained\nVersion: "+types.Version) )
 
 	// --- SECTION 3: RESOURCES & ISSUES ---
 	resourcesHeading := headingStyle.Render("Resources")

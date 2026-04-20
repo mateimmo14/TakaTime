@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"path/filepath"
 	"time"
@@ -21,8 +22,14 @@ func main() {
 	duration := flag.Float64("duration", 0, "Duration in seconds")
 	language := flag.String("language", "unknown", "Lnaguage")
 	editor := flag.String("editor", "unknown", "Editor Name NeoVim/VsCode")
+	versionFlag := flag.Bool("version", false, "show Version")
 
 	flag.Parse()
+
+	if *versionFlag {
+		fmt.Println(types.Version)
+		return
+	}
 
 	if *uri == "" || *duration <= 0 {
 		log.Fatalln("Arguments are empty MongoDB URI or Duration is less than 0")
