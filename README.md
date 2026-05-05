@@ -54,13 +54,22 @@
 </p>
 
 <p align="center"><em>Generated automatically by <a href="https://github.com/Rtarun3606k/TakaTime">TakaTime</a></em></p>
+
+
 ---
 
 ## Official Documentation & Setup
 
 **[Click here to visit the TakaTime Wiki](https://github.com/Rtarun3606k/TakaTime/wiki)** for complete installation guides, database setup (BYODB), dashboard commands, and theme customization.
 
+
 ---
+
+###  Visual Theme Generator
+Tired of manually configuring command-line flags? Use the **[Interactive TakaTime Generator](https://rtarun3606k.github.io/TakaTime/)** to visually customize your stats card, preview themes in real-time, and instantly copy the exact Markdown snippet you need for your GitHub Profile.
+
+---
+
 
 ##  Interactive Terminal Dashboard
 
