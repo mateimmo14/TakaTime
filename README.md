@@ -13,11 +13,15 @@
   <a href="https://github.com/Rtarun3606k/TakaTime/stargazers">
     <img src="https://img.shields.io/github/stars/Rtarun3606k/TakaTime?style=for-the-badge&logo=star&color=ffea00" alt="GitHub Stars">
   </a>
-  <img src="https://img.shields.io/github/downloads/Rtarun3606k/TakaTime/total?style=for-the-badge&color=success" alt="Total Downloads">
+<a href="https://github.com/Rtarun3606k/TakaTime">
+  <img src="https://komarev.com/ghpvc/?username=rtarun3606k&repo=TakaTime&label=Total+Visits&style=for-the-badge" alt="Total Visits"/>
+</a>
   <a href="https://github.com/Rtarun3606k/TakaTime/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Rtarun3606k/TakaTime?style=for-the-badge&color=blue" alt="License">
   </a>
-<img href="https://img.shields.io/github/downloads/rtarun3606k/Takatime/total?style=for-the-badge&color=blue&logo=github" alt="total downloads">
+<a href="https://github.com/rtarun3606k/Takatime/releases">
+  <img src="https://img.shields.io/github/downloads/rtarun3606k/Takatime/total?style=for-the-badge&color=blue&logo=github" alt="total downloads">
+</a>
 
   <br>
 
@@ -36,12 +40,16 @@
   ![Go](https://img.shields.io/badge/Go-65.8%25-00ADD8?style=flat-square&logo=go&logoColor=white)
   ![JavaScript](https://img.shields.io/badge/JavaScript-22.3%25-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
   ![Lua](https://img.shields.io/badge/Lua-11.9%25-000080?style=flat-square&logo=lua&logoColor=white)
+
+
   <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
 
 </div>
 
 <br>
+
+<!--takatime-start-->
 
 <h2 align="center">TakaTime Weekly Report</h2>
 
@@ -55,6 +63,8 @@
 </p>
 
 <p align="center"><em>Generated automatically by <a href="https://github.com/Rtarun3606k/TakaTime">TakaTime</a></em></p>
+
+<!--takatime-end-->
 
 
 ---
@@ -97,12 +107,48 @@ TakaTime includes a fully interactive, offline-first terminal dashboard directly
 
 TakaTime is cross-platform and editor-agnostic. All plugins share the same core Go binaries for a consistent experience.
 
-| Feature | Neovim | VS Code | Antigravity | OS Support |
-| :--- | :--- | :--- | :--- | :--- |
-| **Background Sync** | ✓ Supported | ✓ Supported |✓ Supported | Win, Mac, Linux |
-| **Terminal Dashboard**| ✓ Supported | ✓ Supported | ✓ Supported | Win, Mac, Linux |
-| **Profile Stats** | ✓ Supported | ✓ Supported |✓ Supported | Win, Mac, Linux |
-| **Privacy Controls** | ✓ Supported | ⚙ Planned |⚙ Planned | All OS |
+<div align="center">
+
+<table>
+  <tr>
+    <th>Feature</th>
+    <th>Neovim</th>
+    <th>VS Code</th>
+    <th>Antigravity</th>
+    <th>OS Support</th>
+  </tr>
+  <tr>
+    <td><b>Background Sync</b></td>
+    <td>✓ Supported</td>
+    <td>✓ Supported</td>
+    <td>✓ Supported</td>
+    <td>Win, Mac, Linux</td>
+  </tr>
+  <tr>
+    <td><b>Terminal Dashboard</b></td>
+    <td>✓ Supported</td>
+    <td>✓ Supported</td>
+    <td>✓ Supported</td>
+    <td>Win, Mac, Linux</td>
+  </tr>
+  <tr>
+    <td><b>Profile Stats</b></td>
+    <td>✓ Supported</td>
+    <td>✓ Supported</td>
+    <td>✓ Supported</td>
+    <td>Win, Mac, Linux</td>
+  </tr>
+  <tr>
+    <td><b>Privacy Controls</b></td>
+    <td>✓ Supported</td>
+    <td>⚙ Planned</td>
+    <td>⚙ Planned</td>
+    <td>All OS</td>
+  </tr>
+</table>
+
+</div>
+
 
 ---
 
@@ -129,28 +175,15 @@ TakaTime is cross-platform and editor-agnostic. All plugins share the same core 
 
 ## Contributors & Community
 
-We welcome pull requests! Whether you want to add support for a new IDE or a new TUI theme, check out our [Contribution Guidelines](https://github.com/Rtarun3606k/TakaTime/blob/main/CONTRIBUTING.md).
+We welcome pull requests! Whether you want to add support for a new IDE or a new TUI theme, check out our <a href="https://github.com/Rtarun3606k/TakaTime/blob/main/CONTRIBUTING.md">Contribution Guidelines</a>.
 
-<a href="https://github.com/Rtarun3606k/TakaTime/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Rtarun3606k/TakaTime" />
-</a>
+<p align="center">
+  <a href="https://github.com/Rtarun3606k/TakaTime/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=Rtarun3606k/TakaTime" alt="Contributors" />
+  </a>
+</p>
+
+---
 
 **License:** MIT License. See `LICENSE` for details.
 
-
-<!--takatime-start-->
-
-<h2 align="center">TakaTime Weekly Report</h2>
-
-<p align="center">
-  <img src="./public/taka-time.png" width="100%" alt="Time Stats" /><br/>
-  <img src="./public/taka-languages30.png" width="400" alt="Languages" />
-  <img src="./public/taka-projects30.png" width="400" alt="Projects" /><br/>
-  <img src="./public/taka-languages.png" width="400" alt="Languages" />
-  <img src="./public/taka-projects.png" width="400" alt="Projects" /><br/>
-  <img src="./public/taka-tech.png" width="100%" alt="Tech Stack" />
-</p>
-
-<p align="center"><em>Generated automatically by <a href="https://github.com/Rtarun3606k/TakaTime">TakaTime</a></em></p>
-
-<!--takatime-end-->
