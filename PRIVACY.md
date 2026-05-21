@@ -1,0 +1,1 @@
+TakaTime is a Bring-Your-Own-Database (BYOD) tool. All telemetry data is sent directly to the user's configured MongoDB instance. No personal data, code, or telemetry is ever sent to the plugin creator or any third-party servers.
