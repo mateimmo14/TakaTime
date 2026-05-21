@@ -31,6 +31,9 @@
   <a href="https://marketplace.visualstudio.com/items?itemName=Rtarun3606k.takatime">
     <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VS Code">
   </a>
+  <a href="https://plugins.jetbrains.com/plugin/31861-takatime">
+  <img src="https://img.shields.io/badge/JetBrains-Plugin-000000?style=for-the-badge&logo=jetbrains&logoColor=white" alt="JetBrains Plugin">
+</a>
   <a href="https://github.com/Rtarun3606k/TakaTime">
     <img src="https://img.shields.io/badge/Antigravity-111111?style=for-the-badge&logo=rocket&logoColor=00E5FF">
   </a>
@@ -44,7 +47,7 @@
 
   <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
-
+<!-- <iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/31861"></iframe> -->
 </div>
 
 <br>
