@@ -36,7 +36,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 | Stat Card Preview | Terminal Dashboard |
 |:-:|:-:|
-| ![Dark theme stat card](./public/dark-web.png) | ![Dark theme TUI](https://github.com/user-attachments/assets/bf5546c1-bd06-485a-b7f2-2486348abc2a) |
+| ![Dark theme stat card](https://github.com/user-attachments/assets/3be167e3-53b9-4125-936c-6f91b3a18ea1) | ![Dark theme TUI](https://github.com/user-attachments/assets/bf5546c1-bd06-485a-b7f2-2486348abc2a) |
 
 ---
 
@@ -46,7 +46,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 | Stat Card Preview | Terminal Dashboard |
 |:-:|:-:|
-| ![Light theme stat card](./public/light-web.png) | ![Light theme TUI](https://github.com/user-attachments/assets/5cd5b4a4-f6dd-41e8-85f5-562fdd779261) |
+| ![Light theme stat card](https://github.com/user-attachments/assets/5241b082-f6e9-497e-84e0-e2c39bdc7f9d) | ![Light theme TUI](https://github.com/user-attachments/assets/5cd5b4a4-f6dd-41e8-85f5-562fdd779261) |
 
 ---
 
@@ -164,31 +164,3 @@ Not sure which theme to pick? Use the **[Interactive TakaTime Generator](https:/
 ---
 
 *Generated for [TakaTime](https://github.com/Rtarun3606k/TakaTime) — The Open Source, Self-Hosted WakaTime Alternative.*
-
-
-
-
-
-
-
-
-
-
-
-
- <img width="1288" height="945" alt="catppuccin-tui" src="" />
-<img width="1232" height="956" alt="tokyonight-tui" src="" />
-<img width="1232" height="969" alt="synthwave-tui" src="" />
-<img width="1232" height="958" alt="midnightpurple-tui" src="" />
-<img width="1232" height="966" alt="sunset-tui" src="" />
-<img width="1261" height="952" alt="monokai-tui" src="" />
-<img width="1232" height="954" alt="dracula-tui" src="" />
-<img width="1288" height="939" alt="light-tui" src="" />
-<img width="1316" height="922" alt="cyberpunk-tui" src="" />
-<img width="1288" height="929" alt="dark-tui" src="" />
-
-
- 
-
-
- 
