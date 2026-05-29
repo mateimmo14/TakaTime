@@ -75,11 +75,18 @@ Press `F5` inside VS Code to launch the Extension Development Host.
 
 ```lua
 require("taka-time").setup({
-  mongo_uri = "",
   debounce_seconds = 2,
   debug = false,
 })
 ```
+
+## Initial Configuration
+
+```vim
+:TakaInit
+```
+
+Run `:TakaInit` inside Neovim to configure the MongoDB connection URI.
 
 ## Available Commands
 
@@ -90,6 +97,7 @@ require("taka-time").setup({
 :TakaIgnore
 :TakaTrack
 ```
+
 
 ---
 
