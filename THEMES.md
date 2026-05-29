@@ -30,7 +30,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## 🌑 Dark (Default)
+##  Dark (Default)
 
 **ID:** `dark` &nbsp;|&nbsp; **Palette:** Bright green (`#39d353`) on near-black (`#0d1117`) — inspired by GitHub's contribution graph
 
@@ -40,7 +40,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## ☀️ Light
+##  Light
 
 **ID:** `light` &nbsp;|&nbsp; **Palette:** Soft cream background (`#FDF6E3`) with blue (`#268BD2`), olive, and magenta accents — Solarized Light inspired
 
@@ -50,7 +50,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## 🧛 Dracula
+##  Dracula
 
 **ID:** `dracula` &nbsp;|&nbsp; **Palette:** Soft purple (`#bd93f9`) and cyan (`#8be9fd`) on dark grey-purple (`#282a36`) — the classic Dracula color scheme
 
@@ -60,7 +60,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## 🎨 Monokai
+##  Monokai
 
 **ID:** `monokai` &nbsp;|&nbsp; **Palette:** Vibrant green (`#a6e22e`), hot pink (`#f92672`), and cyan (`#66d9ef`) on an olive-dark background (`#272822`)
 
@@ -70,7 +70,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## ⚡ Cyberpunk
+##  Cyberpunk
 
 **ID:** `cyberpunk` &nbsp;|&nbsp; **Palette:** Neon green (`#00ff9f`) and hot pink (`#f6019d`) on near-black (`#0b0e14`) — maximum contrast, maximum energy
 
@@ -80,7 +80,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## 🌃 Tokyo Night
+##  Tokyo Night
 
 **ID:** `tokyonight` &nbsp;|&nbsp; **Palette:** Cool blue (`#7aa2f7`) and green (`#9ece6a`) on deep navy (`#1a1b26`) — calm and focused, like coding at midnight in Tokyo
 
@@ -90,7 +90,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## 🐱 Catppuccin
+##  Catppuccin
 
 **ID:** `catppuccin` &nbsp;|&nbsp; **Palette:** Pastel blue (`#89b4fa`), green (`#a6e3a1`), and pink (`#f38ba8`) on a soft dark background (`#1e1e2e`) — Mocha variant
 
@@ -100,7 +100,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## 🌊 Synthwave
+##  Synthwave
 
 **ID:** `synthwave` &nbsp;|&nbsp; **Palette:** Retro cyan (`#36f9f6`) and hot pink (`#ff5c8a`) on deep purple (`#241b2f`) — pure 1980s nostalgia
 
@@ -110,7 +110,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## 🌅 Sunset
+##  Sunset
 
 **ID:** `sunset` &nbsp;|&nbsp; **Palette:** Warm amber (`#ff9e64`) and gold (`#ffd580`) on a dark plum background (`#1f1d2b`) — golden hour vibes
 
@@ -125,7 +125,7 @@ A visual reference for all built-in TakaTime color themes. Use the theme name/ID
 
 ---
 
-## 🌙 Midnight Purple
+##  Midnight Purple
 
 **ID:** `midnightpurple` &nbsp;|&nbsp; **Palette:** Soft purple (`#c084fc`) and blue (`#60a5fa`) on very dark purple (`#1b1325`) — elegant and mysterious
 
