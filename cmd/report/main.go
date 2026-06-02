@@ -17,7 +17,6 @@ import (
 	utils "github.com/Rtarun3606k/TakaTime/internal/Utils"
 	"github.com/Rtarun3606k/TakaTime/internal/db"
 	"github.com/Rtarun3606k/TakaTime/internal/types"
-	"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
 //go:embed FiraCodeNerdFontPropo-Retina.ttf
@@ -52,6 +51,7 @@ func main() {
 
 	if versionFlag {
 		fmt.Println(types.Version)
+		return
 		return
 	}
 	// 2. Initialize the Final 'theme' Variable
@@ -138,39 +138,17 @@ func main() {
 	gistToken := os.Getenv("GIST_TOKEN")
 	targetRepo := os.Getenv("TARGET_REPO")
 
-	sampleMode := false
 	if mongoURI == "" {
-		fmt.Println("MONGO_URI not set; generating a local sample image instead.")
-		sampleMode = true
+		log.Fatal("MONGO_URI environment variable is required")
 	}
 
-	var client *mongo.Client
-	if !sampleMode {
-		client, err = db.ConnectToDataBase(mongoURI)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer client.Disconnect(context.TODO())
-	}
-
-	if sampleMode {
-		sampleStats := []types.ListStats{
-			{Label: "go", Value: "3h 32m", Percent: 0.72, Color: theme.Color1},
-			{Label: "lua", Value: "1h 05m", Percent: 0.25, Color: theme.Color2},
-			{Label: "js", Value: "0h 23m", Percent: 0.15, Color: theme.Color3},
-			{Label: "py", Value: "0h 12m", Percent: 0.08, Color: theme.Color4},
-		}
-
-		img, err := buildimg.DrawListCard("Top Languages - All Time", sampleStats, fontData, time.Now(), theme, false)
-		if err != nil {
-			log.Fatalf("failed to generate sample image: %v", err)
-		}
-		if err := utils.SaveImage("public/taka-report-rosepine.png", img); err != nil {
-			log.Fatalf("failed to save sample image: %v", err)
-		}
-		fmt.Println("Sample report image generated at public/taka-report-rosepine.png")
+	client, err := db.ConnectToDataBase(mongoURI)
+	if err != nil {
+		log.Printf("error in connecting to database : %v", err)
 		return
 	}
+
+	defer client.Disconnect(context.TODO())
 
 	if gistToken != "" && targetRepo != "" {
 		fmt.Printf("Updating README for %s...\n", targetRepo)

@@ -5,10 +5,6 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-// ═════════════════════════════════════════════════════════════════════════
-// 1. TUI/CLI DASHBOARD ENGINE STRUCTURES & LOGIC
-// ═════════════════════════════════════════════════════════════════════════
-
 // AppStyles holds all the generated lipgloss styles for a specific theme
 type AppStyles struct {
 	Title       lipgloss.Style
@@ -28,7 +24,7 @@ type AppStyles struct {
 	Navbar lipgloss.Style
 	Footer lipgloss.Style
 
-	// Timestats
+	//timestats
 	StatCard      lipgloss.Style
 	StatCardTitle lipgloss.Style
 	StatCardValue lipgloss.Style
@@ -38,12 +34,12 @@ type AppStyles struct {
 // a full set of Lipgloss styles mapped exactly to those colors.
 func InitStyles(theme types.ThemeConfig) AppStyles {
 	return AppStyles{
-		// Headers & Layout
+		// 1. Headers & Layout
 		Title: lipgloss.NewStyle().
 			Bold(true).
-			Foreground(lipgloss.Color(theme.Color1)). 
+			Foreground(lipgloss.Color(theme.Color1)). // Use Primary color for Title
 			BorderStyle(lipgloss.RoundedBorder()).
-			BorderForeground(lipgloss.Color(theme.Color1)). 
+			BorderForeground(lipgloss.Color(theme.Color1)). // Match border to title
 			Padding(0, 1).
 			MarginBottom(1),
 
@@ -53,41 +49,41 @@ func InitStyles(theme types.ThemeConfig) AppStyles {
 			Padding(0, 1).
 			MarginBottom(1),
 
-		// Base Text
+		// 2. Base Text
 		Text: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.TextColor)),
 
 		SubText: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.SubTextColor)),
 
-		// Formatted Lists (Perfect for Language/Project stats)
+		// 3. Formatted Lists (Perfect for your Language/Project stats)
 		ListLabel: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.TextColor)).
 			Bold(true).
-			Width(15), 
+			Width(15), // Matches the %-15s formatting you used earlier!
 
 		ListValue: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.SubTextColor)).
-			Width(10), 
+			Width(10), // Matches your %-10s
 
 		ListPercent: lipgloss.NewStyle().
-			Foreground(lipgloss.Color(theme.Color2)). 
+			Foreground(lipgloss.Color(theme.Color2)). // Green for percentages looks great
 			Italic(true),
 
-		// Raw Colors (Useful for rendering progress bars)
+		// 4. Raw Colors (Useful for rendering progress bars)
 		Color1: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color1)),
 		Color2: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color2)),
 		Color3: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color3)),
 		Color4: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color4)),
 
-		// Navbar
+		// Navbar: Purple background, white text, padded
 		Navbar: lipgloss.NewStyle().
-			Foreground(lipgloss.Color(theme.BackgroundColor)). 
+			Foreground(lipgloss.Color(theme.BackgroundColor)). // Swap text/bg for contrast
 			Background(lipgloss.Color(theme.Color1)).
 			Padding(0, 1).
 			MarginBottom(1),
 
-		// Footer
+		// Footer: Centered, subtle text
 		Footer: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.SubTextColor)).
 			MarginTop(1),
@@ -96,14 +92,14 @@ func InitStyles(theme types.ThemeConfig) AppStyles {
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color(theme.SubTextColor)).
 			Padding(0, 1).
-			Align(lipgloss.Center), 
+			Align(lipgloss.Center), // Center the text inside the card
 
 		StatCardTitle: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.SubTextColor)).
-			MarginBottom(1), 
+			MarginBottom(1), // Add a space between title and value
 
 		StatCardValue: lipgloss.NewStyle().
-			Foreground(lipgloss.Color(theme.Color1)). 
+			Foreground(lipgloss.Color(theme.Color1)). // Primary color for the big numbers!
 			Bold(true),
 	}
 }
@@ -111,81 +107,38 @@ func InitStyles(theme types.ThemeConfig) AppStyles {
 // BuildStyles compiles raw hex codes from a theme into Lipgloss styles
 func BuildStyles(theme types.ThemeConfig) AppStyles {
 	return AppStyles{
+		// 1. Primary and Secondary Accent Colors
 		Color1: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color1)),
 		Color2: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color2)),
-		Color3: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color3)), 
-		Color4: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color4)), 
+		Color3: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color3)), // Added!
+		Color4: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color4)), // Added!
 
-		Title:   lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color1)).Bold(true), 
+		// 2. Standard Text Colors
+		Title:   lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color1)).Bold(true), // Added!
 		Text:    lipgloss.NewStyle().Foreground(lipgloss.Color(theme.TextColor)),
 		SubText: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.SubTextColor)),
 
-		Navbar: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color2)).Bold(true), 
-		Footer: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.SubTextColor)),      
+		// 3. Layout Elements
+		Navbar: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color2)).Bold(true), // Added!
+		Footer: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.SubTextColor)),      // Added!
 
+		// 4. The outer border style for your main boxes
 		Box: lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color(theme.BarBackgroundColor)).
 			Padding(1, 2),
 
+		// 5. Standardized list styles
 		ListLabel:   lipgloss.NewStyle().Foreground(lipgloss.Color(theme.TextColor)).Bold(true),
 		ListValue:   lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color1)),
 		ListPercent: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.SubTextColor)).Italic(true),
 
+		// 6. Stat Card Styles (Added!)
 		StatCard: lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color(theme.BarBackgroundColor)).
-			Padding(0, 1), 
+			Padding(0, 1), // Tighter padding for smaller stat cards
 		StatCardTitle: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.SubTextColor)),
 		StatCardValue: lipgloss.NewStyle().Foreground(lipgloss.Color(theme.Color1)).Bold(true),
-	}
-}
-
-// ═════════════════════════════════════════════════════════════════════════
-// 2. SVG REPORT RENDERER PALETTES
-// ═════════════════════════════════════════════════════════════════════════
-
-// ThemeColors holds every color slot used by the SVG renderer
-type ThemeColors struct {
-	Background string
-	Text       string
-	SubText    string
-	BarBg      string
-	C1         string
-	C2         string
-	C3         string
-	C4         string
-}
-
-// GetTheme returns the color palette for the requested theme name.
-func GetTheme(name string) ThemeColors {
-	switch name {
-
-	case "dark":
-		return ThemeColors{
-			Background: "#161b22", Text: "#e6edf3", SubText: "#8b949e",
-			BarBg: "#30363d", C1: "#58a6ff", C2: "#3fb950",
-			C3: "#d29922", C4: "#f85149",
-		}
-
-	// ── NEW: Rosé Pine ───────────────────────────────────────────────────────
-	case "rosepine":
-		return ThemeColors{
-			Background: "#191724", // Base   — deep night-sky purple
-			Text:       "#e0def4", // Text   — soft lavender white
-			SubText:    "#6e6a86", // Muted  — desaturated purple
-			BarBg:      "#26233a", // Overlay — dark overlay for empty bars
-			C1:         "#eb6f92", // Love   — rose-red   (All Time / highest)
-			C2:         "#f6c177", // Gold   — warm amber  (Last 30 Days)
-			C3:         "#ebbcba", // Rose   — dusty rose  (Last 7 Days)
-			C4:         "#31748f", // Pine   — teal        (Yesterday / lowest)
-		}
-
-	default:
-		return ThemeColors{
-			Background: "#161b22", Text: "#e6edf3", SubText: "#8b949e",
-			BarBg: "#30363d", C1: "#58a6ff", C2: "#3fb950",
-			C3: "#d29922", C4: "#f85149",
-		}
 	}
 }
