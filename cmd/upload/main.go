@@ -45,7 +45,7 @@ func main() {
 
 	var errr error
 	types.DB, errr = db.InitSQLite()
-	if err != nil {
+	if errr != nil {
 		log.Fatal("Could not initialize local DB:", errr)
 	}
 	defer types.DB.Close()
