@@ -197,6 +197,15 @@ func main() {
 			log.Println("Lang Error:", err)
 		}
 
+		context, cancle := context.WithTimeout(context.Background(), 15*time.Second)
+		defer cancle()
+		collection := client.Database("takatime").Collection("logs")
+
+		_, _, _, dailyHistory, err := dbqueryv2.FetchStreakAndToday(context, collection)
+		if err != nil {
+			log.Printf("Error fetching streak: %v", err)
+		}
+
 		// job 1 : Languages
 		utils.HandleImageJob("Top Languages - All Time", "public/taka-languages.png", gistToken, targetRepo, func() (image.Image, error) {
 			return buildimg.DrawListCard("Top Languages - All Time", langs, fontData, time.Now(), theme, false)
@@ -226,6 +235,11 @@ func main() {
 		// Job 6: Projects
 		utils.HandleImageJob("Top Projects - Last 30 Days", "public/taka-projects30.png", gistToken, targetRepo, func() (image.Image, error) {
 			return buildimg.DrawListCard("Top Projects - Last 30 Days", projects30, fontData, time.Now(), theme, true)
+		})
+
+		// Job 7: Projects
+		utils.HandleImageJob("Heatmap", "public/taka-heatmap.png", gistToken, targetRepo, func() (image.Image, error) {
+			return buildimg.HeatmapStatsImg(dailyHistory, 800, fontData, theme, 2.0)
 		})
 
 		content := utils.GenerateOutput()

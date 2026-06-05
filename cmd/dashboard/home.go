@@ -54,7 +54,6 @@ func buildStatsList(title string, stats []types.ListStats, styles Styles.AppStyl
 	barWidth := 15
 
 	// 2. Loop through the SLICED array
-	// 2. Loop through the SLICED array
 	for _, stat := range displayStats {
 		// 1. Truncate long names, then PAD short names to exactly 12 characters (Left-Aligned)
 		safeLabel := utils.SafeTruncateString(stat.Label, 10)

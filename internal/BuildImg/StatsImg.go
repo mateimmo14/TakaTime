@@ -141,3 +141,131 @@ func drawFooter(dc *gg.Context, text string, fontData []byte, theme types.ThemeC
 	return nil
 }
 
+func HeatmapStatsImg(history map[string]float64, baseWidth int, fontData []byte, theme types.ThemeConfig, scale float64) (image.Image, error) {
+	// 1. Image Layout Constants
+	baseHeight := 210.0
+	cellSize := 10.0 * scale
+	cellSpacing := 3.0 * scale
+	cols := 53.0 // 52 weeks + overlapping days
+
+	// Apply scale to the overall canvas dimensions
+	actualWidth := int(float64(baseWidth) * scale)
+	actualHeight := int(baseHeight * scale)
+
+	// Calculate grid width to center it
+	gridWidth := cols * (cellSize + cellSpacing)
+	startX := (float64(actualWidth) - gridWidth) / 2.0
+
+	// Minimum padding for Y-Axis labels (scaled)
+	if startX < (40.0 * scale) {
+		startX = 40.0 * scale
+	}
+
+	startY := 75.0 * scale
+
+	// 2. Initialize Context with High-Res Dimensions
+	dc := gg.NewContext(actualWidth, actualHeight)
+
+	// Load Font from byte slice
+	f, err := truetype.Parse(fontData)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse font: %v", err)
+	}
+
+	// Scale the fonts
+	normalFace := truetype.NewFace(f, &truetype.Options{Size: 12.0 * scale})
+	titleFace := truetype.NewFace(f, &truetype.Options{Size: 16.0 * scale})
+
+	// Background
+	dc.SetHexColor(theme.BackgroundColor)
+	dc.Clear()
+
+	// 3. Draw Title
+	dc.SetFontFace(titleFace)
+	dc.SetHexColor(theme.TextColor)
+	dc.DrawStringAnchored("━ 365-Day Contribution Graph ━", float64(actualWidth)/2.0, 30.0*scale, 0.5, 0.5)
+
+	dc.SetFontFace(normalFace)
+
+	// 4. Time Setup
+	today := time.Now()
+	start := today.AddDate(0, 0, -364)
+	offset := int(start.Weekday())
+	curr := start.AddDate(0, 0, -offset)
+
+	var lastMonth time.Month = 0
+
+	// 5. Draw the Grid & Header Labels
+	col := 0
+	for !curr.After(today) {
+		// Draw Month Header
+		if curr.Month() != lastMonth {
+			if col > 0 {
+				dc.SetHexColor(theme.SubTextColor)
+				xPos := startX + float64(col)*(cellSize+cellSpacing)
+				dc.DrawStringAnchored(curr.Format("Jan"), xPos, startY-(15.0*scale), 0, 0.5)
+			}
+			lastMonth = curr.Month()
+		}
+
+		// Draw 7 Days
+		for row := 0; row < 7; row++ {
+			if !curr.Before(start) && !curr.After(today) {
+				dateStr := curr.Format("2006-01-02")
+				val := history[dateStr]
+
+				colorHex := theme.BarBackgroundColor
+				// FIX: Added the 4-tier color threshold logic
+				if val > 0 && val <= 1.0 {
+					colorHex = theme.Color1
+				} else if val > 1.0 && val <= 3.0 {
+					colorHex = theme.Color2
+				} else if val > 3.0 && val <= 5.0 {
+					colorHex = theme.Color3
+				} else if val > 5.0 {
+					colorHex = theme.Color4 // The intense color for heavy coding days!
+				}
+
+				x := startX + float64(col)*(cellSize+cellSpacing)
+				y := startY + float64(row)*(cellSize+cellSpacing)
+
+				dc.SetHexColor(colorHex)
+				dc.DrawRoundedRectangle(x, y, cellSize, cellSize, 2.0*scale)
+				dc.Fill()
+			}
+			curr = curr.AddDate(0, 0, 1)
+		}
+		col++
+	}
+
+	// 6. Draw Y-Axis Labels (Mon, Wed, Fri)
+	dc.SetHexColor(theme.SubTextColor)
+	textOffsetX := startX - (12.0 * scale)
+
+	dc.DrawStringAnchored("Mon", textOffsetX, startY+float64(1)*(cellSize+cellSpacing)+(cellSize/2.0)+cellSpacing, 1, 0.5)
+	dc.DrawStringAnchored("Wed", textOffsetX, startY+float64(3)*(cellSize+cellSpacing)+(cellSize/2.0)+cellSpacing, 1, 0.5)
+	dc.DrawStringAnchored("Fri", textOffsetX, startY+float64(5)*(cellSize+cellSpacing)+(cellSize/2.0)+cellSpacing, 1, 0.5)
+
+	// 7. Draw Legend at the bottom right
+	legendY := startY + float64(8)*(cellSize+cellSpacing)
+
+	// FIX: Shifted the legend X-start from 150.0 to 165.0 to accommodate the extra 5th box
+	legendX := startX + gridWidth - (165.0 * scale)
+
+	dc.SetHexColor(theme.SubTextColor)
+	dc.DrawStringAnchored("Less", legendX-(20.0*scale), legendY+(cellSize/2.0), 1, 0.5)
+
+	// FIX: Added theme.Color4 to the slice
+	colors := []string{theme.SubTextColor, theme.Color1, theme.Color2, theme.Color3, theme.Color4}
+	for i, c := range colors {
+		x := legendX + float64(i)*(cellSize+cellSpacing)
+		dc.SetHexColor(c)
+		dc.DrawRoundedRectangle(x, legendY, cellSize, cellSize, 2.0*scale)
+		dc.Fill()
+	}
+
+	dc.SetHexColor(theme.SubTextColor)
+	dc.DrawStringAnchored("More", legendX+float64(len(colors))*(cellSize+cellSpacing)+(5.0*scale), legendY+(cellSize/2.0), 0, 0.5)
+
+	return dc.Image(), nil
+}

@@ -30,6 +30,7 @@ func GenerateOutput() string {
 	sb.WriteString("  <img src=\"./public/taka-languages.png\" width=\"400\" alt=\"Languages\" />\n")
 	sb.WriteString("  <img src=\"./public/taka-projects.png\" width=\"400\" alt=\"Projects\" /><br/>\n")
 	// --- ROW 3: TECH STACK (Full Width) ---
+	sb.WriteString("  <img src=\"./public/taka-heatmap.png\" width=\"100%\" alt=\"Heatmap\" />\n")
 	sb.WriteString("  <img src=\"./public/taka-tech.png\" width=\"100%\" alt=\"Tech Stack\" />\n")
 
 	sb.WriteString("</p>\n\n")
